@@ -27,6 +27,7 @@ class CountDown: UIViewController {
     ]
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         //loop for countdown
         timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true)

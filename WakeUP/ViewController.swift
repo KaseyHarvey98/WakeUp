@@ -73,8 +73,8 @@ class ViewController: UIViewController  {
             
             // updates text to display the difference
             
-            print(endTime)
-            print(countdownLabel.text ?? "0", startTime)
+//            print(endTime)
+//            print(countdownLabel.text ?? "0", startTime)
                } else {
                 timer1?.invalidate()
         }

@@ -9,7 +9,6 @@
 import UIKit
 
 class Settings: UITableViewController{
-    //
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var alarmTime: UITextField!
     private var datePicker : UIDatePicker?
@@ -50,21 +49,5 @@ class Settings: UITableViewController{
         let at = segue.destination as! ViewController
         at.alarmText = self.alarmText
     }
-    
-    
-    @IBAction func buttonClicked(_ sender: UIButton) {
-      print("This is a Git tutorial")
-    }
-    
-//    @IBAction func done2(_ sender: Any) {
-//        self.nameText = nameLabel.text!
-//        performSegue(withIdentifier: "name", sender: self)
-//    }
-//    func prepare1(for segue: UIStoryboardSegue, sender: Any?) {
-//        let nt = segue.destination as! Morning
-//        nt.finalName = self.nameText
-//    }
-
-    
     
 }
