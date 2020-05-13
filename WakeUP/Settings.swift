@@ -52,7 +52,9 @@ class Settings: UITableViewController{
     }
     
     
-    
+    @IBAction func buttonClicked(_ sender: UIButton) {
+      print("This is a Git tutorial")
+    }
     
 //    @IBAction func done2(_ sender: Any) {
 //        self.nameText = nameLabel.text!

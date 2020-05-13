@@ -93,6 +93,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rAo-7N-LgA">
+                            <rect key="frame" x="0.0" y="143" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="buttonClicked:" destination="oij-YI-49T" eventType="touchUpInside" id="8kb-am-CrY"/>
+                            </connections>
+                        </button>
                         <sections>
                             <tableViewSection id="9Hf-u5-y4b">
                                 <cells>
@@ -367,6 +375,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="55y-0y-GeW"/>
         <segue reference="43A-au-lvX"/>
-        <segue reference="MYl-i9-pgx"/>
+        <segue reference="SKh-a7-i9c"/>
     </inferredMetricsTieBreakers>
 </document>
