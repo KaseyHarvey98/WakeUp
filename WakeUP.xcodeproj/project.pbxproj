@@ -17,7 +17,7 @@
 		B266348824679D38001BBF8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B266348624679D38001BBF8A /* Main.storyboard */; };
 		B266348A24679D3B001BBF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B266348924679D3B001BBF8A /* Assets.xcassets */; };
 		B266348D24679D3B001BBF8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B266348B24679D3B001BBF8A /* LaunchScreen.storyboard */; };
-		B2AE18CD246B894F00636928 /* Morning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AE18CC246B894F00636928 /* Morning.swift */; };
+		B2CFD106246DC71300FBD2BF /* Morning.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CFD105246DC71300FBD2BF /* Morning.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		B266348924679D3B001BBF8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B266348C24679D3B001BBF8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B266348E24679D3B001BBF8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2AE18CC246B894F00636928 /* Morning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morning.swift; sourceTree = "<group>"; };
+		B2CFD105246DC71300FBD2BF /* Morning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Morning.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 				B255928B246AA3D40027449A /* CountDown.swift */,
 				B255928F246AA4440027449A /* WakeUp.swift */,
 				B2559291246AA86E0027449A /* Settings.swift */,
-				B2AE18CC246B894F00636928 /* Morning.swift */,
+				B2CFD105246DC71300FBD2BF /* Morning.swift */,
 			);
 			path = WakeUP;
 			sourceTree = "<group>";
@@ -154,9 +154,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B266348524679D38001BBF8A /* ViewController.swift in Sources */,
+				B2CFD106246DC71300FBD2BF /* Morning.swift in Sources */,
 				B266348124679D38001BBF8A /* AppDelegate.swift in Sources */,
 				B25592842468B8F90027449A /* Clock.swift in Sources */,
-				B2AE18CD246B894F00636928 /* Morning.swift in Sources */,
 				B2559290246AA4440027449A /* WakeUp.swift in Sources */,
 				B266348324679D38001BBF8A /* SceneDelegate.swift in Sources */,
 				B2559292246AA86E0027449A /* Settings.swift in Sources */,

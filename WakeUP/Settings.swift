@@ -12,7 +12,7 @@ class Settings: UITableViewController{
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var alarmTime: UITextField!
     private var datePicker : UIDatePicker?
-    var alarmText = "00:00:00"
+    var alarmText = Date()
     var nameText = ""
     
     override func viewDidLoad() {
@@ -34,7 +34,9 @@ class Settings: UITableViewController{
     @objc func dateChanged(datePicker : UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .none
         alarmTime.text = dateFormatter.string(from: datePicker.date)
+        alarmText = dateFormatter.date(from: alarmTime.text!)!
     }
     
     // MARK:- Table View Data Source
@@ -42,12 +44,12 @@ class Settings: UITableViewController{
                             numberOfRowsInSection section: Int) -> Int { return 2 }
     // MARK:- Transfer Time
     @IBAction func done(_ sender: Any) {
-        self.alarmText = alarmTime.text!
+//        self.alarmText = alarmTime.text!
         performSegue(withIdentifier: "alarm", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let at = segue.destination as! ViewController
-        at.alarmText = self.alarmText
+        at.alarmClock = self.alarmText
     }
     
 }

@@ -12,28 +12,27 @@ import CoreLocation
 
 class Morning : UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var greetingLabel: UILabel!
-    @IBOutlet weak var zipcode: UILabel!
+    var address = ""
     var saveZipcode = ""
     var finalName = ""
     @IBOutlet weak var weatherLabel: UILabel!
+    
+    //GeoCoding
+    let geocoder = CLGeocoder()
+    var placemark: CLPlacemark?
+    var performingReverseGeocoding = false
+    var lastGeocodingError: Error?
+    
     
     let locationManager = CLLocationManager() // this object will give us the GPS Coordinates
     var location: CLLocation? // this stores the user's current location and changes as new GPS coordinates come in
     var updatingLocation = false // Checking if the app is trying to get GPS coordinates
     var lastLocationError: Error?
     
-    // GeoCoding
-    let geocoder = CLGeocoder() // this object will perform the geocoding
-    var placemark: CLPlacemark? // this object will contain the address results
-    var performingReverseGeoCoding = false
-    var lastGeoCodingError: Error?
-    
-    var timer: Timer?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         getLocation()
-        updateLabels()
+        getWeather()
     }
     
     func getLocation(){
@@ -48,21 +47,28 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             showLocationDeniedAlert()
             return
         }
-        
-        if updatingLocation{
-            stopLocationManager()
-        }else{
-            location = nil
-            lastLocationError = nil
-            placemark = nil
-            lastGeoCodingError = nil
+        placemark = nil
+        lastGeocodingError = nil
+        startLocationManager()
+        updateLabels()
+    }
+    
+    
+    func startLocationManager() {
+        if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters // Setting the accuracy
-            locationManager.startUpdatingLocation() // Start obtaining the GPS coordinates
+            locationManager.desiredAccuracy =
+            kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
             updatingLocation = true
         }
     }
-    
+    func stopLocationManager() {
+        if updatingLocation {
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+            updatingLocation = false
+        } }
     func showLocationDeniedAlert(){
         let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services for this app in Settings", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -70,94 +76,103 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-        
-        if (error as NSError).code == CLError.locationUnknown.rawValue{
+        print("didFailWithError \(error.localizedDescription)")
+        if (error as NSError).code ==
+            CLError.locationUnknown.rawValue {
             return
         }
-        
         lastLocationError = error
         stopLocationManager()
+        updateLabels()
     }
-    
-    func stopLocationManager(){
-        if updatingLocation{
-            locationManager.stopUpdatingLocation()
-            locationManager.delegate = self
-            updatingLocation = false
+    func locationManager(_ manager: CLLocationManager,
+                         didUpdateLocations locations: [CLLocation]) {
+        let newLocation = locations.last!
+        print("didUpdateLocations \(newLocation)")
+        if newLocation.timestamp.timeIntervalSinceNow < -2 {
+            return
         }
+        if newLocation.horizontalAccuracy < 0 {
+            return
+        }
+        if location == nil || location!.horizontalAccuracy >
+            newLocation.horizontalAccuracy {
+            lastLocationError = nil
+            location = newLocation
+        }
+        if newLocation.horizontalAccuracy <=
+            locationManager.desiredAccuracy {
+            print("*** We’re done!")
+            stopLocationManager()
+        }
+        updateLabels()
+        if !performingReverseGeocoding {
+            print("*** Going to geocode")
+            performingReverseGeocoding = true
+            geocoder.reverseGeocodeLocation(newLocation, completionHandler:
+            { placemarks, error in
+              self.lastGeocodingError = error
+              if error == nil, let p = placemarks, !p.isEmpty {
+                self.placemark = p.last!
+              } else {
+                self.placemark = nil
+              }
+              self.performingReverseGeocoding = false
+              self.updateLabels()
+            }
+        )}
     }
     
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        if let newLocation = locations.last{
-//            // If new location was determined later than 5 seconds ago, ignore it
-//            if newLocation.timestamp.timeIntervalSinceNow < -5{
-//                return
-//            }
-//
-//            // If horizontal accuracy is less than zero, ignore it
-//            if newLocation.horizontalAccuracy < 0{
-//                return
-//            }
-//
-//            // Calculating the distance between the new reading and the previous reading
-//            var distance = CLLocationDistance(Double.greatestFiniteMagnitude)
-//            if let location = location{
-//                distance = newLocation.distance(from: location)
-//            }
-//
-//            // 3. if no location was set yet or new location is more accurate (a larger accuracy value means less accurate)
-//            if location == nil || location!.horizontalAccuracy > newLocation.horizontalAccuracy{
-//                // clears out any previous error if there was one
-//                lastLocationError = nil
-//                location = newLocation
-//
-//                // if new location's accuracy is equal to or better than the desired accuracy, stop the location manager
-//                if newLocation.horizontalAccuracy <= locationManager.desiredAccuracy{
-//                    stopLocationManager()
-//
-//                    if distance > 0 {
-//                        performingReverseGeoCoding = false
-//                    }
-//                }
-//
-//                if !performingReverseGeoCoding{ // should only be performing one geocoding at a time
-//                    performingReverseGeoCoding = true
-//                    geocoder.reverseGeocodeLocation(newLocation) { (placemark, error) in
-//                        if error == nil, let p = placemark, !p.isEmpty{
-//                            self.placemark = p.last!
-//                        }else{
-//                            self.placemark = nil
-//                        }
-//
-//                        self.performingReverseGeoCoding = false
-//                    }
-//                }
-//            }
-//            }
-//        }
-    
-    func string(from placemark: CLPlacemark) ->String{
-        let zipcodes = placemark.postalCode!
-        return zipcodes
+    func string(from placemark: CLPlacemark) -> String {
+        var line1 = ""
+        if let s = placemark.postalCode {
+            line1 += s + ","
+        }
+        if let s = placemark.isoCountryCode {
+            line1 += s
+        }
+        return line1
+        
     }
     
-       func updateLabels(){
-         if location != nil{
-             if let placemark = placemark{
-                 let code = string(from: placemark)
-                 zipcode.text = string(from: placemark)
-                print ("djbsibdbciw")
-                print(zipcode.text as Any)
-                 print(code)
-             }
-         }
-//         return zipcode.text!
-     }
+    func updateLabels(){
+        if location == location {
+            address = ""
+            if let placemark = placemark {
+                address = string(from: placemark)
+                saveZipcode = address
+            } else if performingReverseGeocoding {
+                address = ""
+            } else if lastGeocodingError != nil {
+                address = "Error Finding Address"
+            } else {
+                address = "No Address Found"
+            }
+        } else {
+            let statusMessage: String
+            if let error = lastLocationError as NSError? {
+                if error.domain == kCLErrorDomain &&
+                    error.code == CLError.denied.rawValue {
+                    statusMessage = "Location Services Disabled"
+                    print(statusMessage)
+                    
+                } else {
+                    statusMessage = "Error Getting Location"
+                    print(statusMessage)
+                    
+                }
+            } else if !CLLocationManager.locationServicesEnabled() {
+                statusMessage = "Location Services Disabled"
+                print(statusMessage)
+                
+            } else if updatingLocation {
+                statusMessage = "Searching..."
+                print(statusMessage)
+            }}}
     //    MARK:- Get Weather
     func getWeather() {
         let session = URLSession.shared
-        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?zip=10550,us&units=imperial&appid=18ad38c6774bd2096a9e97f4e0ff71aa")!
+        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?zip= \(self.saveZipcode) &units=imperial&appid=18ad38c6774bd2096a9e97f4e0ff71aa")!
         let dataTask = session.dataTask(with: weatherURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
@@ -187,5 +202,5 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             }
         }
         dataTask.resume()
-    }
+        }
 }

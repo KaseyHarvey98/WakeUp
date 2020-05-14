@@ -15,27 +15,23 @@ class ViewController: UIViewController  {
     var timer : Timer?
     var timer1: Timer?
     var difference = -1
-    var alarmText = "HH:mm:ss"
+    var alarmClock = Date()
+    var alarm = Date()
+    let formatter = DateFormatter()
     
     @IBOutlet weak var timeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //giving default /"reset"
-        countdownLabel.text = alarmText
         // getting alarm input from settings page
-        timeLabel.text = alarmText
+        alarm = alarmClock
         // loop for clock
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true)
-        //loop for countdown
         timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
     @objc func updateTimeLabel() {
-        let formatter = DateFormatter()
         formatter.timeStyle = .short
         timeLabel.text = formatter.string(from: clock.currentTime as Date)
     }
@@ -47,36 +43,30 @@ class ViewController: UIViewController  {
     
     // MARK:- Countdown
     @IBOutlet weak var countdownLabel: UILabel!
-    let formatter1 = DateFormatter() // format string input into date
-    let userAlarm =  NSCalendar.current // to create instance for component
-    // defining components
-    let requestedtime : NSCalendar.Unit = [
-        NSCalendar.Unit.hour ,
-        NSCalendar.Unit.minute,
-        NSCalendar.Unit.second
-    ]
     // Prints Count Down
     @objc func  printTime(){
-//        let date = Date()
-//        print(date.distance(to: Date() + 10))
-        
+        let userAlarm =  Calendar.current // to create instance for component
         let startTime = clock.currentTime  // current time
-        let endTime =  start + 1 * 60
-        
+        let component = userAlarm.dateComponents([.hour, .minute, .second], from: alarm)
+        let endTime = userAlarm.date(bySettingHour: component.hour!, minute: component.minute!, second: component.second!, of: startTime)!
         // difference from current to alarm time
         let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
         
         difference = timeDifference.second!
         if difference > -1 {
-                   let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
+            let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime )
             countdownLabel.text = "\(timeDifference.hour ?? 23) : \(timeDifference.minute ?? 23) : \(timeDifference.second ?? 23) "
-            
+            print ("alarm")
+            print(alarm)
+            print("curr")
+            print(clock.currentTime)
+            print ("diff")
+            print(component)
+            print("end")
+            print(endTime)
             // updates text to display the difference
-            
-//            print(endTime)
-//            print(countdownLabel.text ?? "0", startTime)
-               } else {
-                timer1?.invalidate()
+        } else {
+            timer1?.invalidate()
         }
     }
 }
