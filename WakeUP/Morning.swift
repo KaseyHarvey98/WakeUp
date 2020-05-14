@@ -32,7 +32,11 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         getLocation()
-        getWeather()
+        print("zip \(saveZipcode)")
+        let seconds = 5.0
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            self.getWeather()
+        }
     }
     
     func getLocation(){
@@ -171,8 +175,10 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             }}}
     //    MARK:- Get Weather
     func getWeather() {
+        print("zip \(saveZipcode)")
         let session = URLSession.shared
-        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?zip= \(self.saveZipcode) &units=imperial&appid=18ad38c6774bd2096a9e97f4e0ff71aa")!
+        let weatherURL = URL(string:"http://api.openweathermap.org/data/2.5/weather?zip=\(self.saveZipcode)&units=imperial&APPID=18ad38c6774bd2096a9e97f4e0ff71aa")!
+
         let dataTask = session.dataTask(with: weatherURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
