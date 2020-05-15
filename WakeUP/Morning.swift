@@ -12,10 +12,12 @@ import CoreLocation
 import AVFoundation
 
 class Morning : UIViewController, CLLocationManagerDelegate {
-    @IBOutlet weak var greetingLabel: UILabel!
     var address = ""
-    var saveZipcode = ""
-    var finalName = ""
+      var saveZipcode = ""
+      var finalName = ""
+      var name = ""
+    
+    @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     
     //GeoCoding
@@ -32,12 +34,12 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        greetingLabel.text = "Good Morning " + finalName
+        print("name 38")
+        print(greetingLabel.text!)
         getLocation()
-        print("zip \(saveZipcode)")
-        let seconds = 2.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.getWeather()
-            //            textToSpeech()
         }
         
     }
@@ -92,7 +94,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
-        print("didUpdateLocations \(newLocation)")
+//        print("didUpdateLocations \(newLocation)")
         if newLocation.timestamp.timeIntervalSinceNow < -2 {
             return
         }
@@ -161,7 +163,6 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                 } else {
                     statusMessage = "Error Getting Location"
                     print(statusMessage)
-                    
                 }
             } else if !CLLocationManager.locationServicesEnabled() {
                 statusMessage = "Location Services Disabled"
@@ -183,23 +184,33 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                 print("Error:\n\(error)")
             } else {
                 if let data = data {
+                    // All data from weather API
                     let dataString = String(data: data, encoding: String.Encoding.utf8)
                     print("All the weather data:\n\(dataString!)")
+                    // Use JSON to navigate
                     if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
+                       // Weather is a struct in api data
                         let weatherData = (jsonObj["weather"]as! NSArray)
+                        // Access "Weather's" data
                         if let aDictionary = weatherData[0] as? NSDictionary{
-                        if let mainDictionary = jsonObj.value(forKey: "main") as? NSDictionary {
-                            if let temperature = mainDictionary.value(forKey: "temp"),
-                                let cityName = jsonObj.value(forKey: "name"),
-                                let description = aDictionary.value(forKey: "description"),
-                                let realFeel = mainDictionary.value(forKey: "feels_like")
-                            {
-                                
-                                DispatchQueue.main.async {
-                                    self.weatherLabel.text = "\(cityName ) Temperature: \(temperature)°F"
-                                    self.textToSpeech(name: "Kasey", temp: "\(temperature)",decription: "\(description)" ,realFeel: "\(realFeel)" )
-                                }
-                            }}
+                            // Access data in other part of API Response
+                            if let mainDictionary = jsonObj.value(forKey: "main") as? NSDictionary {
+                                // Get value of temp
+                                if let temperature = mainDictionary.value(forKey: "temp"),
+                                    //Get value of city
+                                    let cityName = jsonObj.value(forKey: "name"),
+                                    // Get decriptions for sky
+                                    let description = aDictionary.value(forKey: "description"),
+                                    // Get Real Feel temperature
+                                    let realFeel = mainDictionary.value(forKey: "feels_like")
+                                {
+                                    DispatchQueue.main.sync {
+                                        //Displays Weather info
+                                        self.weatherLabel.text = "\(cityName ) Temperature: \(Int(temperature as! Double))°F"
+                                        // Calls text to peech to say current weather
+                                        self.textToSpeech(name: "\(self.greetingLabel.text ?? "Kasey")", temp: "\(Int(temperature as! Double))",decription: "\(description)" ,realFeel: "\(realFeel)" )
+                                    }
+                                }}
                         } else {
                             print("Error: unable to find temperature in dictionary")
                         }
@@ -215,8 +226,8 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     }
     // MARK:- Good Morning Speech
     func textToSpeech(name: String, temp: String, decription: String, realFeel: String  ){
-        let utterance = AVSpeechUtterance(string: "Good morning \(name). The temperature is currently \(temp) degrees with \(decription). The real feel temperature is \(realFeel) degrees.")
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        let utterance = AVSpeechUtterance(string: " \(name). The temperature is currently \(temp) degrees with \(decription). The real feel temperature is \(realFeel) degrees.")
+        utterance.voice = AVSpeechSynthesisVoice(language: "de-DE")
         utterance.rate = 0.5
         
         let synthesizer = AVSpeechSynthesizer()

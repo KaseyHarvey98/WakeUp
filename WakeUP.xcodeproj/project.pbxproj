@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B25592842468B8F90027449A /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25592832468B8F90027449A /* Clock.swift */; };
 		B255928C246AA3D40027449A /* CountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255928B246AA3D40027449A /* CountDown.swift */; };
 		B2559290246AA4440027449A /* WakeUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255928F246AA4440027449A /* WakeUp.swift */; };
 		B2559292246AA86E0027449A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2559291246AA86E0027449A /* Settings.swift */; };
 		B266348124679D38001BBF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266348024679D38001BBF8A /* AppDelegate.swift */; };
 		B266348324679D38001BBF8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266348224679D38001BBF8A /* SceneDelegate.swift */; };
-		B266348524679D38001BBF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266348424679D38001BBF8A /* ViewController.swift */; };
+		B266348524679D38001BBF8A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B266348424679D38001BBF8A /* HomeScreen.swift */; };
 		B266348824679D38001BBF8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B266348624679D38001BBF8A /* Main.storyboard */; };
 		B266348A24679D3B001BBF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B266348924679D3B001BBF8A /* Assets.xcassets */; };
 		B266348D24679D3B001BBF8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B266348B24679D3B001BBF8A /* LaunchScreen.storyboard */; };
@@ -21,14 +20,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B25592832468B8F90027449A /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		B255928B246AA3D40027449A /* CountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDown.swift; sourceTree = "<group>"; };
 		B255928F246AA4440027449A /* WakeUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUp.swift; sourceTree = "<group>"; };
 		B2559291246AA86E0027449A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B266347D24679D38001BBF8A /* WakeUP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B266348024679D38001BBF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B266348224679D38001BBF8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B266348424679D38001BBF8A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B266348424679D38001BBF8A /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		B266348724679D38001BBF8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B266348924679D3B001BBF8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B266348C24679D3B001BBF8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,12 +66,11 @@
 			children = (
 				B266348024679D38001BBF8A /* AppDelegate.swift */,
 				B266348224679D38001BBF8A /* SceneDelegate.swift */,
-				B266348424679D38001BBF8A /* ViewController.swift */,
+				B266348424679D38001BBF8A /* HomeScreen.swift */,
 				B266348624679D38001BBF8A /* Main.storyboard */,
 				B266348924679D3B001BBF8A /* Assets.xcassets */,
 				B266348B24679D3B001BBF8A /* LaunchScreen.storyboard */,
 				B266348E24679D3B001BBF8A /* Info.plist */,
-				B25592832468B8F90027449A /* Clock.swift */,
 				B255928B246AA3D40027449A /* CountDown.swift */,
 				B255928F246AA4440027449A /* WakeUp.swift */,
 				B2559291246AA86E0027449A /* Settings.swift */,
@@ -153,10 +150,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B266348524679D38001BBF8A /* ViewController.swift in Sources */,
+				B266348524679D38001BBF8A /* HomeScreen.swift in Sources */,
 				B2CFD106246DC71300FBD2BF /* Morning.swift in Sources */,
 				B266348124679D38001BBF8A /* AppDelegate.swift in Sources */,
-				B25592842468B8F90027449A /* Clock.swift in Sources */,
 				B2559290246AA4440027449A /* WakeUp.swift in Sources */,
 				B266348324679D38001BBF8A /* SceneDelegate.swift in Sources */,
 				B2559292246AA86E0027449A /* Settings.swift in Sources */,

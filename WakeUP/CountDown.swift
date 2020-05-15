@@ -7,47 +7,49 @@
 //
 
 import UIKit
+import Foundation
 
 class CountDown: UIViewController {
-    let clock = Clock()
-    var start = Clock().alarm
-    var timer : Timer?
-    var timer1: Timer?
+
+    @IBOutlet weak var countDownLabel: UILabel!
+    let stop = Date()
+    var timer: Timer?
     var difference = -1
     var alarmText = "HH:mm:ss"
-    
-    @IBOutlet weak var countDownLabel: UILabel!
+    var sent = false
+    var received = false
     
     let userAlarm =  NSCalendar.current // to create instance for component
     // defining components
-    let requestedtime : NSCalendar.Unit = [
-        NSCalendar.Unit.hour ,
-        NSCalendar.Unit.minute,
-        NSCalendar.Unit.second
-    ]
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        received = sent
         //loop for countdown
-        timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true)
     }
-    
-    @objc func  printTime(){
-        
-        let startTime = clock.currentTime  // current time
-        let endTime =  start + 10 * 60
-        
-        // difference from current to alarm time
-        let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
-        
-        difference = timeDifference.second!
-        if difference > -1 {
-            let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
-            countDownLabel.text = "\(timeDifference.hour ?? 23) : \(timeDifference.minute ?? 23) : \(timeDifference.second ?? 23) "
-
-        } else {
-            timer1?.invalidate()
-        }
-    }
+ @objc func  printTime(){
+    let startTime = Date()  // current time
+print(clock)
+    let endTime =  stop + 10
+    print(endTime)
+     // difference from current to alarm time
+     let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
+print(timeDifference)
+     difference = timeDifference.second!
+     if difference == 0 && received == true{
+         let wu : WakeUpScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Awake") as! WakeUpScreen
+         wu.modalPresentationStyle = .fullScreen
+         self.present(wu, animated: true, completion: nil)
+     }
+     if difference > -1 {
+         let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime )
+         countDownLabel.text = " \(timeDifference.minute ?? 23) : \(timeDifference.second ?? 23) "
+        difference -= 1
+     }
+     else {
+        self.timer?.invalidate()
+     }
+ }
 }

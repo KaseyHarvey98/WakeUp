@@ -8,26 +8,30 @@
 
 import UIKit
 
-class WakeUp: UIViewController {
-
-    @IBOutlet weak var Snooze: UIButton!
-    @IBOutlet weak var ImUp: UIButton!
-    @IBOutlet weak var End: UIButton!
+class WakeUpScreen: UIViewController {
+    var sent = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func goToMS(_ sender: Any) {
+        let mc : Morning = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Greet") as! Morning
+        mc.modalPresentationStyle = .fullScreen
+        self.present(mc, animated: true, completion: nil)
     }
-    */
-
+    
+    @IBAction func returnToHome(_ sender: Any) {
+        let hs : HomeScreen  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as! HomeScreen
+        hs.modalPresentationStyle = .fullScreen
+        self.present(hs, animated: true, completion: nil)
+    }
+    
+    @IBAction func goToCD(_ sender: Any) {
+        sent = true
+        let cd : CountDown = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CD") as! CountDown
+        cd.modalPresentationStyle = .fullScreen
+        cd.sent = self.sent
+        self.present(cd, animated: true, completion: nil)
+    }
+    
 }
