@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import AVFoundation
 
 class Morning : UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var greetingLabel: UILabel!
@@ -33,10 +34,12 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         getLocation()
         print("zip \(saveZipcode)")
-        let seconds = 5.0
+        let seconds = 2.0
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             self.getWeather()
+            //            textToSpeech()
         }
+        
     }
     
     func getLocation(){
@@ -56,8 +59,6 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         startLocationManager()
         updateLabels()
     }
-    
-    
     func startLocationManager() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -78,7 +79,6 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError \(error.localizedDescription)")
         if (error as NSError).code ==
@@ -114,19 +114,18 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             print("*** Going to geocode")
             performingReverseGeocoding = true
             geocoder.reverseGeocodeLocation(newLocation, completionHandler:
-            { placemarks, error in
-              self.lastGeocodingError = error
-              if error == nil, let p = placemarks, !p.isEmpty {
-                self.placemark = p.last!
-              } else {
-                self.placemark = nil
-              }
-              self.performingReverseGeocoding = false
-              self.updateLabels()
+                { placemarks, error in
+                    self.lastGeocodingError = error
+                    if error == nil, let p = placemarks, !p.isEmpty {
+                        self.placemark = p.last!
+                    } else {
+                        self.placemark = nil
+                    }
+                    self.performingReverseGeocoding = false
+                    self.updateLabels()
             }
-        )}
+            )}
     }
-    
     func string(from placemark: CLPlacemark) -> String {
         var line1 = ""
         if let s = placemark.postalCode {
@@ -138,7 +137,6 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         return line1
         
     }
-    
     func updateLabels(){
         if location == location {
             address = ""
@@ -178,7 +176,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         print("zip \(saveZipcode)")
         let session = URLSession.shared
         let weatherURL = URL(string:"http://api.openweathermap.org/data/2.5/weather?zip=\(self.saveZipcode)&units=imperial&APPID=18ad38c6774bd2096a9e97f4e0ff71aa")!
-
+        
         let dataTask = session.dataTask(with: weatherURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
@@ -188,14 +186,20 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                     let dataString = String(data: data, encoding: String.Encoding.utf8)
                     print("All the weather data:\n\(dataString!)")
                     if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
+                        let weatherData = (jsonObj["weather"]as! NSArray)
+                        if let aDictionary = weatherData[0] as? NSDictionary{
                         if let mainDictionary = jsonObj.value(forKey: "main") as? NSDictionary {
-                            let cityName = jsonObj.value(forKey: "name")
-                            if let temperature = mainDictionary.value(forKey: "temp") {
+                            if let temperature = mainDictionary.value(forKey: "temp"),
+                                let cityName = jsonObj.value(forKey: "name"),
+                                let description = aDictionary.value(forKey: "description"),
+                                let realFeel = mainDictionary.value(forKey: "feels_like")
+                            {
                                 
                                 DispatchQueue.main.async {
-                                    self.weatherLabel.text = "\(cityName ?? "Brooklyn") Temperature: \(temperature)°F"
+                                    self.weatherLabel.text = "\(cityName ) Temperature: \(temperature)°F"
+                                    self.textToSpeech(name: "Kasey", temp: "\(temperature)",decription: "\(description)" ,realFeel: "\(realFeel)" )
                                 }
-                            }
+                            }}
                         } else {
                             print("Error: unable to find temperature in dictionary")
                         }
@@ -208,5 +212,14 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             }
         }
         dataTask.resume()
-        }
+    }
+    // MARK:- Good Morning Speech
+    func textToSpeech(name: String, temp: String, decription: String, realFeel: String  ){
+        let utterance = AVSpeechUtterance(string: "Good morning \(name). The temperature is currently \(temp) degrees with \(decription). The real feel temperature is \(realFeel) degrees.")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+        
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
+    }
 }
