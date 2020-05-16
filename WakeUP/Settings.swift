@@ -16,9 +16,21 @@ class Settings: UITableViewController{
     var alarmText = Date()
     var sent = false
     
+    let dateFormatter = DateFormatter()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .none
         self.navigationItem.setHidesBackButton(true, animated: true)
+        if let x = UserDefaults.standard.object(forKey: "alarm") as? Date{
+            alarmText = x
+            alarmTime.text = dateFormatter.string(from: alarmText)
+        }
+        if let x = UserDefaults.standard.object(forKey: "name") as? String{
+            nameLabel.text = x
+        }
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .time
         datePicker?.addTarget(self, action: #selector(dateChanged(datePicker:)), for: .valueChanged)
@@ -31,9 +43,6 @@ class Settings: UITableViewController{
         view.endEditing(true)
     }
     @objc func dateChanged(datePicker : UIDatePicker) {
-        let dateFormatter = DateFormatter()
-               dateFormatter.timeStyle = .short
-               dateFormatter.dateStyle = .none
         alarmTime.text = dateFormatter.string(from: datePicker.date)
         alarmText = dateFormatter.date(from: alarmTime.text!)!
     }
@@ -47,9 +56,9 @@ class Settings: UITableViewController{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         sent = true
-        let at = segue.destination as? HomeScreen
-        at!.alarmClock = self.alarmText
-        at!.name = self.nameLabel.text ?? "Kasey"
-        at?.sent = self.sent
+        UserDefaults.standard.set(self.alarmText, forKey: "alarm")
+        UserDefaults.standard.set(self.nameLabel.text, forKey: "name")
+        UserDefaults.standard.set(sent, forKey: "recieved")
+        print(alarmText)
     }
 }

@@ -29,15 +29,17 @@ class HomeScreen: UIViewController  {
     var wakeUpTimer: Timer!
     var sent = false
     var received = false
-    var name = ""
-    var sentName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alarm = alarmClock
-        sentName = name
-        received = sent
-        print (alarm )
+        //        print (alarm )
+        if let x = UserDefaults.standard.object(forKey: "alarm") as? Date{
+            print (alarm)
+            alarm = x
+        }
+        if let y = UserDefaults.standard.object(forKey: "recieved") as? Bool{
+            received = y
+        }
         self.navigationItem.setHidesBackButton(true, animated: true);
         // loop for clock
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true)
@@ -48,7 +50,7 @@ class HomeScreen: UIViewController  {
         super.viewWillAppear(animated)
         updateTimeLabel()
     }
-    
+
     @objc func updateTimeLabel() {
         formatter.timeStyle = .short
         timeLabel.text = formatter.string(from: clock.currentTime as Date)
@@ -59,7 +61,7 @@ class HomeScreen: UIViewController  {
     @objc func  printTime(){
         let userAlarm =  Calendar.current // to create instance for component
         let startTime = clock.currentTime  // current time
-    // if end == negative  need to subtract from new day
+        // if end == negative  need to subtract from new day
         let component = userAlarm.dateComponents([.hour, .minute, .second], from: alarm) // this is  from current to alarm
         let endTime = userAlarm.date(bySettingHour: component.hour ?? 23, minute: component.minute ?? 23, second: component.second ?? 23, of: startTime)!
         // difference from current to alarm time
@@ -70,10 +72,20 @@ class HomeScreen: UIViewController  {
         var differS = timeDifference.second!
         
         if  (timeDifference.hour! < 0) || (timeDifference.minute! < 0) || (timeDifference.second! < 0) {
+            if (timeDifference.hour! == 0) {
+                differH = timeDifference.hour!
+            }
+            if (timeDifference.minute! == 0) {
+                differM = timeDifference.minute!
+            }
+            if (timeDifference.second! == 0) {
+                           differS = timeDifference.second!
+                       }
+            else{
             differH = timeDifference.hour! + 24
             differM = timeDifference.minute! + 60
-            differS = timeDifference.second! + 60
-             }
+            differS = timeDifference.second! + 60}
+        }
         
         // if endtime > how maany hours left in the day, then add new day ?
         
@@ -84,14 +96,13 @@ class HomeScreen: UIViewController  {
             difference = (differS)
         }
         if (((timeDifference.hour != 0) || (timeDifference.minute != 0) || (timeDifference.second != 0))){
-
+            
             difference = (differH * 3600) + (differM * 60) + (differS)
         }
         if difference == 1 && received == true {
             let tt : WakeUpScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Awake") as! WakeUpScreen
             tt.modalPresentationStyle = .fullScreen
             self.present(tt, animated: true, completion: nil)
-            print (difference)
         }
         if difference > -1 && received == true{
             timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
@@ -102,31 +113,30 @@ class HomeScreen: UIViewController  {
                 differH = timeDifference.hour! + 24
                 differM = timeDifference.minute! + 60
                 differS = timeDifference.second! + 60
-                 }
-            print (difference)
+            }
             countdownLabel.text = String(format:"%02i:%02i:%02i", differH, differM, differS )
         }
         else {
             self.timer1?.invalidate()
         }
         // from wake up screen to home
-//@IBAction func unwindToMe(segue: UIStoryboardSegue){}
-//    }
-//    func calculate(date: DateComponents ) -> Int{
-//
-//
-//        var difference
-//        var differH = timeDifference.hour!
-//
-//                   var differM = date.minute!
-//                   var differS = date.second!
-//
-//                   if  (date.hour! < 0) || (date.minute! < 0) || (date.second! < 0) {
-//                       differH = date.hour! + 24
-//                       differM = date.minute! + 60
-//                       differS = date.second! + 60
-//                        }
-//        return difference
+        //@IBAction func unwindToMe(segue: UIStoryboardSegue){}
+        //    }
+        //    func calculate(date: DateComponents ) -> Int{
+        //
+        //
+        //        var difference
+        //        var differH = timeDifference.hour!
+        //
+        //                   var differM = date.minute!
+        //                   var differS = date.second!
+        //
+        //                   if  (date.hour! < 0) || (date.minute! < 0) || (date.second! < 0) {
+        //                       differH = date.hour! + 24
+        //                       differM = date.minute! + 60
+        //                       differS = date.second! + 60
+        //                        }
+        //        return difference
     }
 }
 // MARK:- Test

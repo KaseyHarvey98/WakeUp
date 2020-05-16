@@ -64,13 +64,13 @@
 		B266347F24679D38001BBF8A /* WakeUP */ = {
 			isa = PBXGroup;
 			children = (
+				B266348B24679D3B001BBF8A /* LaunchScreen.storyboard */,
+				B266348924679D3B001BBF8A /* Assets.xcassets */,
+				B266348E24679D3B001BBF8A /* Info.plist */,
 				B266348024679D38001BBF8A /* AppDelegate.swift */,
 				B266348224679D38001BBF8A /* SceneDelegate.swift */,
-				B266348424679D38001BBF8A /* HomeScreen.swift */,
 				B266348624679D38001BBF8A /* Main.storyboard */,
-				B266348924679D3B001BBF8A /* Assets.xcassets */,
-				B266348B24679D3B001BBF8A /* LaunchScreen.storyboard */,
-				B266348E24679D3B001BBF8A /* Info.plist */,
+				B266348424679D38001BBF8A /* HomeScreen.swift */,
 				B255928B246AA3D40027449A /* CountDown.swift */,
 				B255928F246AA4440027449A /* WakeUp.swift */,
 				B2559291246AA86E0027449A /* Settings.swift */,

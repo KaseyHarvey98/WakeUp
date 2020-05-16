@@ -12,13 +12,17 @@ import CoreLocation
 import AVFoundation
 
 class Morning : UIViewController, CLLocationManagerDelegate {
-    var address = ""
+      var address = ""
       var saveZipcode = ""
-      var finalName = ""
       var name = ""
     
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
+    @IBAction func End(_ sender: Any) {
+         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+     }
+    
+    
     
     //GeoCoding
     let geocoder = CLGeocoder()
@@ -33,8 +37,11 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     var lastLocationError: Error?
     
     override func viewDidLoad() {
+        if let x = UserDefaults.standard.object(forKey: "name") as? String{
+            name = x
+        }
         super.viewDidLoad()
-        greetingLabel.text = "Good Morning " + finalName
+        greetingLabel.text = "Good Morning " + name
         print("name 38")
         print(greetingLabel.text!)
         getLocation()
