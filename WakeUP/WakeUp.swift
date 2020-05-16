@@ -19,11 +19,9 @@ class WakeUpScreen: UIViewController {
         mc.modalPresentationStyle = .fullScreen
         self.present(mc, animated: true, completion: nil)
     }
-    
-    @IBAction func returnToHome(_ sender: Any) {
-        let hs : HomeScreen  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as! HomeScreen
-        hs.modalPresentationStyle = .fullScreen
-        self.present(hs, animated: true, completion: nil)
+  
+    @IBAction func End(_ sender: Any) {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func goToCD(_ sender: Any) {

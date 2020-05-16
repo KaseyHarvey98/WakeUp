@@ -18,6 +18,7 @@ class Settings: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: true)
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .time
         datePicker?.addTarget(self, action: #selector(dateChanged(datePicker:)), for: .valueChanged)

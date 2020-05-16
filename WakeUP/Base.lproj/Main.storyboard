@@ -12,17 +12,17 @@
             <objects>
                 <viewController storyboardIdentifier="Home" id="BYZ-38-t0r" customClass="HomeScreen" customModule="WakeUP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cool-black-background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4d-dq-dVH">
-                                <rect key="frame" x="-37" y="-193" width="488" height="1025"/>
+                                <rect key="frame" x="-37" y="-139" width="488" height="1025"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1025" id="78E-yt-KTD"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown until you need to Wake Up:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-ZO-F9o">
-                                <rect key="frame" x="44" y="455" width="326" height="21"/>
+                                <rect key="frame" x="44" y="509" width="326" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="akg-hb-dZf"/>
                                 </constraints>
@@ -31,13 +31,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-hZ-Aa4">
-                                <rect key="frame" x="0.0" y="118" width="414" height="346"/>
+                                <rect key="frame" x="0.0" y="162" width="414" height="356"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCU-tO-MHq">
-                                <rect key="frame" x="146" y="535" width="119" height="48"/>
+                                <rect key="frame" x="146" y="589" width="119" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -82,9 +82,11 @@
                     <connections>
                         <outlet property="countdownLabel" destination="xCU-tO-MHq" id="cJ7-3v-deO"/>
                         <outlet property="timeLabel" destination="Dtl-hZ-Aa4" id="CXd-ww-jvJ"/>
+                        <segue destination="7ec-ul-vfK" kind="unwind" identifier="home" unwindAction="prepareForUnwindWithSegue:" id="G4d-Z3-Mr5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="7ec-ul-vfK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1698.5507246376815" y="-124.55357142857142"/>
         </scene>
@@ -93,7 +95,7 @@
             <objects>
                 <tableViewController id="oij-YI-49T" customClass="Settings" customModule="WakeUP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ef7-Xz-qEw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,7 +118,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXT-fy-laE">
-                                                    <rect key="frame" x="20" y="14" width="57" height="24"/>
+                                                    <rect key="frame" x="20" y="14.333333333333336" width="57" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="57" id="VNj-dF-uF9"/>
                                                         <constraint firstAttribute="height" constant="24" id="acq-KJ-UOb"/>
@@ -222,7 +224,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="nWH-fP-Dgk"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="h8I-aN-rbU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXV-Ts-Iwf">
@@ -233,7 +235,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="R3r-wq-w01" kind="show" id="66N-0G-9vR"/>
+                                    <segue destination="R3r-wq-w01" kind="showDetail" id="66N-0G-9vR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -364,7 +366,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="End"/>
                                 <connections>
-                                    <action selector="returnToHome:" destination="XJV-Lw-nVh" eventType="touchUpInside" id="q8E-Sq-a9J"/>
+                                    <action selector="End:" destination="XJV-Lw-nVh" eventType="touchUpInside" id="f7E-cU-ezi"/>
+                                    <segue destination="BYZ-38-t0r" kind="showDetail" id="xRe-Se-v3l"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -392,7 +395,6 @@
         <!--Navigation Controller-->
         <scene sceneID="jwv-80-5d1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b6H-j2-Hln" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jM9-uf-Hw3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
@@ -405,6 +407,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zM1-A4-T8T"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b6H-j2-Hln" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="109.82142857142857"/>
         </scene>
