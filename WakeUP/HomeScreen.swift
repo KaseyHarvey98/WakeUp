@@ -72,19 +72,9 @@ class HomeScreen: UIViewController  {
         var differS = timeDifference.second!
         
         if  (timeDifference.hour! < 0) || (timeDifference.minute! < 0) || (timeDifference.second! < 0) {
-            if (timeDifference.hour! == 0) {
-                differH = timeDifference.hour!
-            }
-            if (timeDifference.minute! == 0) {
-                differM = timeDifference.minute!
-            }
-            if (timeDifference.second! == 0) {
-                           differS = timeDifference.second!
-                       }
-            else{
             differH = timeDifference.hour! + 24
             differM = timeDifference.minute! + 60
-            differS = timeDifference.second! + 60}
+            differS = timeDifference.second! + 60
         }
         
         // if endtime > how maany hours left in the day, then add new day ?
@@ -114,29 +104,12 @@ class HomeScreen: UIViewController  {
                 differM = timeDifference.minute! + 60
                 differS = timeDifference.second! + 60
             }
+            print (difference)
             countdownLabel.text = String(format:"%02i:%02i:%02i", differH, differM, differS )
         }
         else {
             self.timer1?.invalidate()
         }
-        // from wake up screen to home
-        //@IBAction func unwindToMe(segue: UIStoryboardSegue){}
-        //    }
-        //    func calculate(date: DateComponents ) -> Int{
-        //
-        //
-        //        var difference
-        //        var differH = timeDifference.hour!
-        //
-        //                   var differM = date.minute!
-        //                   var differS = date.second!
-        //
-        //                   if  (date.hour! < 0) || (date.minute! < 0) || (date.second! < 0) {
-        //                       differH = date.hour! + 24
-        //                       differM = date.minute! + 60
-        //                       differS = date.second! + 60
-        //                        }
-        //        return difference
     }
 }
 // MARK:- Test

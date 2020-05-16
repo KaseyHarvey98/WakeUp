@@ -18,8 +18,10 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
+    
+    
     @IBAction func End(_ sender: Any) {
-         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
      }
     
     

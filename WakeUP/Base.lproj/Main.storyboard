@@ -12,17 +12,17 @@
             <objects>
                 <viewController storyboardIdentifier="Home" id="BYZ-38-t0r" customClass="HomeScreen" customModule="WakeUP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cool-black-background" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m4d-dq-dVH">
-                                <rect key="frame" x="-37" y="-193" width="488" height="1025"/>
+                                <rect key="frame" x="-37" y="-139" width="488" height="1025"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1025" id="78E-yt-KTD"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown until you need to Wake Up:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-ZO-F9o">
-                                <rect key="frame" x="44" y="455" width="326" height="21"/>
+                                <rect key="frame" x="44" y="509" width="326" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="akg-hb-dZf"/>
                                 </constraints>
@@ -31,13 +31,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-hZ-Aa4">
-                                <rect key="frame" x="0.0" y="174" width="414" height="290"/>
+                                <rect key="frame" x="0.0" y="162" width="414" height="356"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCU-tO-MHq">
-                                <rect key="frame" x="146" y="535" width="119" height="48"/>
+                                <rect key="frame" x="146" y="589" width="119" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -95,7 +95,7 @@
             <objects>
                 <tableViewController id="oij-YI-49T" customClass="Settings" customModule="WakeUP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ef7-Xz-qEw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -224,7 +224,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="h8I-aN-rbU"/>
+                                    <action selector="End:" destination="faV-Ad-iSI" eventType="touchUpInside" id="ofB-Jm-ykz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXV-Ts-Iwf">
@@ -235,6 +235,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="WakeUp:" destination="faV-Ad-iSI" eventType="touchUpInside" id="t7h-Jr-tOp"/>
                                     <segue destination="R3r-wq-w01" kind="showDetail" id="66N-0G-9vR"/>
                                 </connections>
                             </button>
@@ -301,7 +302,7 @@
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="c0e-wH-sPs"/>
+                                    <action selector="End:" destination="R3r-wq-w01" eventType="touchUpInside" id="U9c-vU-gVR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -367,7 +368,6 @@
                                 <state key="normal" title="End"/>
                                 <connections>
                                     <action selector="End:" destination="XJV-Lw-nVh" eventType="touchUpInside" id="f7E-cU-ezi"/>
-                                    <segue destination="BYZ-38-t0r" kind="showDetail" id="xRe-Se-v3l"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -418,6 +418,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SSH-zR-vZu"/>
-        <segue reference="c0e-wH-sPs"/>
+        <segue reference="HI3-YJ-Fyp"/>
     </inferredMetricsTieBreakers>
 </document>
