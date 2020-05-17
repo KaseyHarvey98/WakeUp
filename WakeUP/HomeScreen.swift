@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  HomeScreen.swift
 //  WakeUP
 //
-//  Created by Kasey Harvey on 5/9/20.
+//  Created by Kasey Harvey on 4/20/20.
 //  Copyright © 2020 Kasey Harvey. All rights reserved.
 //
 
@@ -18,39 +18,40 @@ class HomeScreen: UIViewController  {
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    
     let clock = Clock()
-    var start = Clock().currentTime
-    var timer : Timer?
-    var timer1: Timer?
-    var difference = -1
-    var alarmClock = Date()
-    var alarm = Date()
     let formatter = DateFormatter()
-    var wakeUpTimer: Timer!
-    var sent = false
-    var received = false
+    var start = Clock().currentTime
+    var timerC : Timer? // Timer for clock
+    var timerCD: Timer? //Timer for count down
+    var difference = -1 // Initiate difference of time
+    var alarm = Date()
+    var sent = false // input from Settings
+    var received = false // saved input from Settings
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        print (alarm )
+        // Save alarm
         if let x = UserDefaults.standard.object(forKey: "alarm") as? Date{
-            print (alarm)
             alarm = x
         }
         if let y = UserDefaults.standard.object(forKey: "recieved") as? Bool{
+              self.timerCD?.invalidate()
             received = y
         }
+        // Hide back button on Home Screen (cant go back from here)
         self.navigationItem.setHidesBackButton(true, animated: true);
-        // loop for clock
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true)
-        timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true)
+        
+        timerC = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true) // loop for clock updates
+        timerCD = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true) // loop for countdown updates
     }
-    // makes clock appear
+    // Clock and countdown appear as soon as screen is up
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTimeLabel()
     }
-
+    // MARK:- Clock
+    // Clock is formatted correctly
     @objc func updateTimeLabel() {
         formatter.timeStyle = .short
         timeLabel.text = formatter.string(from: clock.currentTime as Date)
@@ -61,24 +62,23 @@ class HomeScreen: UIViewController  {
     @objc func  printTime(){
         let userAlarm =  Calendar.current // to create instance for component
         let startTime = clock.currentTime  // current time
-        // if end == negative  need to subtract from new day
-        let component = userAlarm.dateComponents([.hour, .minute, .second], from: alarm) // this is  from current to alarm
+        // from time current to alarm
+        let component = userAlarm.dateComponents([.hour, .minute, .second], from: alarm)
+        // from end time of alarm
         let endTime = userAlarm.date(bySettingHour: component.hour ?? 23, minute: component.minute ?? 23, second: component.second ?? 23, of: startTime)!
         // difference from current to alarm time
-        var timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
-        
+        let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
+        // Save time components **Will return negative if time is in the past
         var differH = timeDifference.hour!
         var differM = timeDifference.minute!
         var differS = timeDifference.second!
-        
+        // If time is in the past, make positive
         if  (timeDifference.hour! < 0) || (timeDifference.minute! < 0) || (timeDifference.second! < 0) {
             differH = timeDifference.hour! + 24
             differM = timeDifference.minute! + 60
             differS = timeDifference.second! + 60
         }
-        
-        // if endtime > how maany hours left in the day, then add new day ?
-        
+        // Time diference is written in base value ( 1 hour = 1 difference). This converts to seconds
         if ((timeDifference.hour == 0) && ((timeDifference.minute != 0) || (timeDifference.second != 0))){
             difference = (differM * 60) + (differS)
         }
@@ -89,26 +89,20 @@ class HomeScreen: UIViewController  {
             
             difference = (differH * 3600) + (differM * 60) + (differS)
         }
+        // If countdown is done, go to wake up screen
         if difference == 1 && received == true {
+            difference = 0 // reset difference
             let tt : WakeUpScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Awake") as! WakeUpScreen
             tt.modalPresentationStyle = .fullScreen
             self.present(tt, animated: true, completion: nil)
         }
+        // If not done, print time
         if difference > -1 && received == true{
-            timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
-            var differH = timeDifference.hour!
-            var differM = timeDifference.minute!
-            var differS = timeDifference.second!
-            if  (timeDifference.hour! < 0) || (timeDifference.minute! < 0) || (timeDifference.second! < 0) {
-                differH = timeDifference.hour! + 24
-                differM = timeDifference.minute! + 60
-                differS = timeDifference.second! + 60
-            }
-            print (difference)
             countdownLabel.text = String(format:"%02i:%02i:%02i", differH, differM, differS )
+            difference = 0 // reset difference
         }
         else {
-            self.timer1?.invalidate()
+            self.timerCD?.invalidate()
         }
     }
 }

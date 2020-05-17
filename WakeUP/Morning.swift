@@ -2,7 +2,7 @@
 //  Morning.swift
 //  WakeUP
 //
-//  Created by Kasey Harvey on 5/12/20.
+//  Created by Kasey Harvey on 4/20/20..
 //  Copyright © 2020 Kasey Harvey. All rights reserved.
 //
 
@@ -12,9 +12,9 @@ import CoreLocation
 import AVFoundation
 
 class Morning : UIViewController, CLLocationManagerDelegate {
-      var address = ""
-      var saveZipcode = ""
-      var name = ""
+    var address = ""
+    var saveZipcode = ""
+    var name = ""
     
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
@@ -22,7 +22,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     
     @IBAction func End(_ sender: Any) {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-     }
+    }
     
     
     
@@ -39,22 +39,25 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     var lastLocationError: Error?
     
     override func viewDidLoad() {
-        if let x = UserDefaults.standard.object(forKey: "name") as? String{
-            name = x
-        }
         super.viewDidLoad()
+        if let x = UserDefaults.standard.object(forKey: "name") as? String{
+                   name = x
+               }
         greetingLabel.text = "Good Morning " + name
         print("name 38")
         print(greetingLabel.text!)
-        getLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.getWeather()
-        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                          self.getWeather()
+                      }
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        getLocation()
+       
+    }
+    // MARK:- Get Location
     func getLocation(){
-        // Asking for Permissin
+        // Asking for Permission
         let authStatus = CLLocationManager.authorizationStatus()
         if authStatus == .notDetermined{
             locationManager.requestWhenInUseAuthorization()
@@ -70,6 +73,14 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         startLocationManager()
         updateLabels()
     }
+    // If location permission denies
+    func showLocationDeniedAlert(){
+        let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services for this app in Settings", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // Start locating
     func startLocationManager() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -79,17 +90,15 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             updatingLocation = true
         }
     }
+    // Stop locating
     func stopLocationManager() {
         if updatingLocation {
             locationManager.stopUpdatingLocation()
             locationManager.delegate = nil
             updatingLocation = false
-        } }
-    func showLocationDeniedAlert(){
-        let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services for this app in Settings", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        }
     }
+    // Manages if no location was found
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError \(error.localizedDescription)")
         if (error as NSError).code ==
@@ -100,10 +109,11 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         stopLocationManager()
         updateLabels()
     }
+    // Manages if location was found
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
-//        print("didUpdateLocations \(newLocation)")
+        // Checks for accuracy from initial location
         if newLocation.timestamp.timeIntervalSinceNow < -2 {
             return
         }
@@ -121,6 +131,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             stopLocationManager()
         }
         updateLabels()
+        // Gets zipcode and country from user's device
         if !performingReverseGeocoding {
             print("*** Going to geocode")
             performingReverseGeocoding = true
@@ -137,6 +148,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             }
             )}
     }
+    // Returns zipcode and country from user's location
     func string(from placemark: CLPlacemark) -> String {
         var line1 = ""
         if let s = placemark.postalCode {
@@ -149,19 +161,15 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         
     }
     func updateLabels(){
+        // Saves updated location
         if location == location {
-            address = ""
             if let placemark = placemark {
                 address = string(from: placemark)
                 saveZipcode = address
-            } else if performingReverseGeocoding {
-                address = ""
-            } else if lastGeocodingError != nil {
-                address = "Error Finding Address"
-            } else {
-                address = "No Address Found"
             }
-        } else {
+        }else {
+            address = ""
+            // Error messages
             let statusMessage: String
             if let error = lastLocationError as NSError? {
                 if error.domain == kCLErrorDomain &&
@@ -183,10 +191,10 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             }}}
     //    MARK:- Get Weather
     func getWeather() {
-        print("zip \(saveZipcode)")
         let session = URLSession.shared
+        // Api webite
         let weatherURL = URL(string:"http://api.openweathermap.org/data/2.5/weather?zip=\(self.saveZipcode)&units=imperial&APPID=18ad38c6774bd2096a9e97f4e0ff71aa")!
-        
+        // Start session
         let dataTask = session.dataTask(with: weatherURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
@@ -198,7 +206,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                     print("All the weather data:\n\(dataString!)")
                     // Use JSON to navigate
                     if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
-                       // Weather is a struct in api data
+                        // Weather is a struct in api data
                         let weatherData = (jsonObj["weather"]as! NSArray)
                         // Access "Weather's" data
                         if let aDictionary = weatherData[0] as? NSDictionary{
@@ -215,13 +223,18 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                                 {
                                     DispatchQueue.main.sync {
                                         //Displays Weather info
-                                        self.weatherLabel.text = "\(cityName ) Temperature: \(Int(temperature as! Double))°F"
+                                        let line1 = "Current Weather for \(cityName)"
+                                        let line2 = "Current Temperatue : \(Int(temperature as! Double))°F"
+                                        let line3 = "Feels Like : \(Int(realFeel as! Double))°F"
+                                        let line4 = "The sky shows \(description)"
+                                        self.weatherLabel.text = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4
                                         // Calls text to peech to say current weather
-                                        self.textToSpeech(name: "\(self.greetingLabel.text ?? "Kasey")", temp: "\(Int(temperature as! Double))",decription: "\(description)" ,realFeel: "\(realFeel)" )
+                                        self.textToSpeech(name: "\(self.greetingLabel.text ?? "Kasey")", temp: "\(Int(temperature as! Double))",decription: "\(description)" ,realFeel: "\(Int(realFeel as! Double))" )
                                     }
                                 }}
-                        } else {
-                            print("Error: unable to find temperature in dictionary")
+                        } else // list of error codes
+                        {
+                            print("Error: unable to find key in dictionary")
                         }
                     } else {
                         print("Error: unable to convert json data")
@@ -235,8 +248,8 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     }
     // MARK:- Good Morning Speech
     func textToSpeech(name: String, temp: String, decription: String, realFeel: String  ){
-        let utterance = AVSpeechUtterance(string: " \(name). The temperature is currently \(temp) degrees with \(decription). The real feel temperature is \(realFeel) degrees.")
-        utterance.voice = AVSpeechSynthesisVoice(language: "de-DE")
+        let utterance = AVSpeechUtterance(string: " \(name). The temperature is currently \(temp) degrees Fahrenheit, with \(decription). The real feel temperature is \(realFeel) degrees.")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 0.5
         
         let synthesizer = AVSpeechSynthesizer()
