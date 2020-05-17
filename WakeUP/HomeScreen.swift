@@ -31,24 +31,31 @@ class HomeScreen: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Save alarm
         if let x = UserDefaults.standard.object(forKey: "alarm") as? Date{
             alarm = x
         }
         if let y = UserDefaults.standard.object(forKey: "recieved") as? Bool{
-              self.timerCD?.invalidate()
             received = y
         }
         // Hide back button on Home Screen (cant go back from here)
         self.navigationItem.setHidesBackButton(true, animated: true);
         
         timerC = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimeLabel), userInfo: nil, repeats: true) // loop for clock updates
-        timerCD = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true) // loop for countdown updates
+
+
     }
     // Clock and countdown appear as soon as screen is up
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTimeLabel()
+        timerCD = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(printTime), userInfo: nil, repeats: true) // loop for countdown updates
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+         if let timerCD = timerCD {
+                   timerCD.invalidate()
+        }
     }
     // MARK:- Clock
     // Clock is formatted correctly
@@ -89,9 +96,10 @@ class HomeScreen: UIViewController  {
             
             difference = (differH * 3600) + (differM * 60) + (differS)
         }
+        
         // If countdown is done, go to wake up screen
         if difference == 1 && received == true {
-            difference = 0 // reset difference
+            difference = 0// reset difference
             let tt : WakeUpScreen = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Awake") as! WakeUpScreen
             tt.modalPresentationStyle = .fullScreen
             self.present(tt, animated: true, completion: nil)
@@ -99,7 +107,6 @@ class HomeScreen: UIViewController  {
         // If not done, print time
         if difference > -1 && received == true{
             countdownLabel.text = String(format:"%02i:%02i:%02i", differH, differM, differS )
-            difference = 0 // reset difference
         }
         else {
             self.timerCD?.invalidate()

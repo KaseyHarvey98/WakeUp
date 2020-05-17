@@ -20,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B221089F2471925000CDAA57 /* WakeUP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WakeUP.entitlements; sourceTree = "<group>"; };
 		B255928B246AA3D40027449A /* CountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDown.swift; sourceTree = "<group>"; };
 		B255928F246AA4440027449A /* WakeUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUp.swift; sourceTree = "<group>"; };
 		B2559291246AA86E0027449A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		B266347F24679D38001BBF8A /* WakeUP */ = {
 			isa = PBXGroup;
 			children = (
+				B221089F2471925000CDAA57 /* WakeUP.entitlements */,
 				B266348B24679D3B001BBF8A /* LaunchScreen.storyboard */,
 				B266348924679D3B001BBF8A /* Assets.xcassets */,
 				B266348E24679D3B001BBF8A /* Info.plist */,
@@ -300,6 +302,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WakeUP/WakeUP.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -320,6 +323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WakeUP/WakeUP.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6J8B7JH5L8;
 				INFOPLIST_FILE = WakeUP/Info.plist;

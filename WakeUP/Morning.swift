@@ -44,8 +44,6 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                    name = x
                }
         greetingLabel.text = "Good Morning " + name
-        print("name 38")
-        print(greetingLabel.text!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                           self.getWeather()
                       }
@@ -127,13 +125,11 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         }
         if newLocation.horizontalAccuracy <=
             locationManager.desiredAccuracy {
-            print("*** We’re done!")
             stopLocationManager()
         }
         updateLabels()
         // Gets zipcode and country from user's device
         if !performingReverseGeocoding {
-            print("*** Going to geocode")
             performingReverseGeocoding = true
             geocoder.reverseGeocodeLocation(newLocation, completionHandler:
                 { placemarks, error in
