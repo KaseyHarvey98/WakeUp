@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B22108A32471AFAB00CDAA57 /* SoundPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22108A22471AFAB00CDAA57 /* SoundPicker.swift */; };
 		B255928C246AA3D40027449A /* CountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255928B246AA3D40027449A /* CountDown.swift */; };
 		B2559290246AA4440027449A /* WakeUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B255928F246AA4440027449A /* WakeUp.swift */; };
 		B2559292246AA86E0027449A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2559291246AA86E0027449A /* Settings.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		B221089F2471925000CDAA57 /* WakeUP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WakeUP.entitlements; sourceTree = "<group>"; };
+		B22108A22471AFAB00CDAA57 /* SoundPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPicker.swift; sourceTree = "<group>"; };
 		B255928B246AA3D40027449A /* CountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDown.swift; sourceTree = "<group>"; };
 		B255928F246AA4440027449A /* WakeUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUp.swift; sourceTree = "<group>"; };
 		B2559291246AA86E0027449A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				B255928F246AA4440027449A /* WakeUp.swift */,
 				B2559291246AA86E0027449A /* Settings.swift */,
 				B2CFD105246DC71300FBD2BF /* Morning.swift */,
+				B22108A22471AFAB00CDAA57 /* SoundPicker.swift */,
 			);
 			path = WakeUP;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				B266348524679D38001BBF8A /* HomeScreen.swift in Sources */,
 				B2CFD106246DC71300FBD2BF /* Morning.swift in Sources */,
 				B266348124679D38001BBF8A /* AppDelegate.swift in Sources */,
+				B22108A32471AFAB00CDAA57 /* SoundPicker.swift in Sources */,
 				B2559290246AA4440027449A /* WakeUp.swift in Sources */,
 				B266348324679D38001BBF8A /* SceneDelegate.swift in Sources */,
 				B2559292246AA86E0027449A /* Settings.swift in Sources */,

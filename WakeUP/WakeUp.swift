@@ -10,18 +10,14 @@ import UIKit
 import AVFoundation
 
 class WakeUpScreen: UIViewController {
-    var sent = false // did press snooze
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        AudioServicesPlaySystemSound(1130)
-    }
+    
     // Go to Morning via button
     @IBAction func goToMS(_ sender: Any) {
         let mc : Morning = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Greet") as! Morning
         mc.modalPresentationStyle = .fullScreen
         self.present(mc, animated: true, completion: nil)
     }
-  // Go to HomeScreen via button
+    // Go to HomeScreen via button
     @IBAction func End(_ sender: Any) {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
@@ -33,8 +29,28 @@ class WakeUpScreen: UIViewController {
         cd.sent = self.sent
         self.present(cd, animated: true, completion: nil)
     }
+    var sent = false // did press snooze
+    var alarmSound : AVAudioPlayer?
+    var getSound = ""
     
     
-   
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let x = UserDefaults.standard.object(forKey: "sound") as? String{
+        getSound = x
+        }
+        let sound = NSDataAsset(name: getSound)!
+        do {
+            try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try! AVAudioSession.sharedInstance().setActive(true)
+            try alarmSound = AVAudioPlayer(data: sound.data, fileTypeHint: AVFileType.mp3.rawValue)
+            alarmSound!.play()
+        } catch {
+            // couldn't load file :(
+        }
+    }
     
+    override func viewDidDisappear(_ animated: Bool) {
+           alarmSound?.stop()
+       }
 }

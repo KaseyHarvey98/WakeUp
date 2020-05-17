@@ -10,6 +10,7 @@ import UIKit
 
 class Settings: UITableViewController{
     
+    @IBOutlet weak var alarmSound: UIButton!
     @IBOutlet weak var nameLabel: UITextField!
     @IBOutlet weak var alarmTime: UIDatePicker!
     // Goes to home screen vis button
@@ -33,6 +34,9 @@ class Settings: UITableViewController{
         if let x = UserDefaults.standard.object(forKey: "name") as? String{
             nameLabel.text = x
         }
+        if let x = UserDefaults.standard.object(forKey: "sound") as? String{
+        alarmSound.setTitle(x, for: .normal)
+        }
         // times alarmTime, user changed time
         alarmTime.addTarget(self, action: #selector(dateChanged(datePicker:)), for: .valueChanged)
         // Tracks to see if user tapped out of input
@@ -44,7 +48,7 @@ class Settings: UITableViewController{
     }
     // MARK:- Table View Data Source
     override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int { return 4 }
+                            numberOfRowsInSection section: Int) -> Int { return 3 }
     
     // MARK:- Transfer Time and Name / Set Defaults
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

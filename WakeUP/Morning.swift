@@ -221,8 +221,8 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                                         //Displays Weather info
                                         let line1 = "Current Weather for \(cityName)"
                                         let line2 = "Current Temperatue : \(Int(temperature as! Double))°F"
-                                        let line3 = "Feels Like : \(Int(realFeel as! Double))°F"
-                                        let line4 = "The sky shows \(description)"
+                                        let line3 = "The sky shows \(description)."
+                                        let line4 = "Feels Like : \(Int(realFeel as! Double))°F"
                                         self.weatherLabel.text = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4
                                         // Calls text to peech to say current weather
                                         self.textToSpeech(name: "\(self.greetingLabel.text ?? "Kasey")", temp: "\(Int(temperature as! Double))",decription: "\(description)" ,realFeel: "\(Int(realFeel as! Double))" )
