@@ -12,10 +12,6 @@ import CoreLocation
 import AVFoundation
 
 class Morning : UIViewController, CLLocationManagerDelegate {
-    var address = ""
-    var saveZipcode = ""
-    var name = ""
-    
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     
@@ -24,34 +20,38 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
-    
-    
     //GeoCoding
     let geocoder = CLGeocoder()
     var placemark: CLPlacemark?
     var performingReverseGeocoding = false
     var lastGeocodingError: Error?
-    
-    
     let locationManager = CLLocationManager() // this object will give us the GPS Coordinates
     var location: CLLocation? // this stores the user's current location and changes as new GPS coordinates come in
     var updatingLocation = false // Checking if the app is trying to get GPS coordinates
     var lastLocationError: Error?
     
+    var address = ""
+    var saveZipcode = ""
+    var name = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let x = UserDefaults.standard.object(forKey: "name") as? String{
-                   name = x
-               }
+            name = x
+        }
+        if let x = UserDefaults.standard.object(forKey: "location") as? String{
+            saveZipcode = x
+        }
         greetingLabel.text = "Good Morning " + name
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                          self.getWeather()
-                      }
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.getWeather()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.getForecast()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         getLocation()
-       
     }
     // MARK:- Get Location
     func getLocation(){
@@ -148,14 +148,16 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     func string(from placemark: CLPlacemark) -> String {
         var line1 = ""
         if let s = placemark.postalCode {
-            line1 += s + ","
+            line1 += "postal_code=" + s
         }
         if let s = placemark.isoCountryCode {
-            line1 += s
+            line1 += "&country=" + s
         }
+        UserDefaults.standard.set(line1, forKey: "location")
         return line1
         
     }
+    
     func updateLabels(){
         // Saves updated location
         if location == location {
@@ -185,11 +187,12 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                 statusMessage = "Searching..."
                 print(statusMessage)
             }}}
-    //    MARK:- Get Weather
+    //    MARK:- Get Current Weather
     func getWeather() {
         let session = URLSession.shared
         // Api webite
-        let weatherURL = URL(string:"http://api.openweathermap.org/data/2.5/weather?zip=\(self.saveZipcode)&units=imperial&APPID=18ad38c6774bd2096a9e97f4e0ff71aa")!
+        let weatherURL = URL(string:"https://api.weatherbit.io/v2.0/current?&\(self.saveZipcode)&units=I&key=92bc115e8b094ca6a3cb53fbcd569198")!
+        
         // Start session
         let dataTask = session.dataTask(with: weatherURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
@@ -203,19 +206,18 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                     // Use JSON to navigate
                     if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
                         // Weather is a struct in api data
-                        let weatherData = (jsonObj["weather"]as! NSArray)
+                        let weatherData = (jsonObj["data"]as! NSArray)
                         // Access "Weather's" data
                         if let aDictionary = weatherData[0] as? NSDictionary{
-                            // Access data in other part of API Response
-                            if let mainDictionary = jsonObj.value(forKey: "main") as? NSDictionary {
+                            // access data for decription
+                            if let dDictionary =  aDictionary.value(forKey: "weather")as? NSDictionary{
                                 // Get value of temp
-                                if let temperature = mainDictionary.value(forKey: "temp"),
-                                    //Get value of city
-                                    let cityName = jsonObj.value(forKey: "name"),
+                                if  let temperature = aDictionary.value(forKey: "temp"),                                    //Get value of city
+                                    let cityName = aDictionary.value(forKey: "city_name"),
                                     // Get decriptions for sky
-                                    let description = aDictionary.value(forKey: "description"),
+                                    let description = dDictionary.value(forKey: "description"),
                                     // Get Real Feel temperature
-                                    let realFeel = mainDictionary.value(forKey: "feels_like")
+                                    let realFeel = aDictionary.value(forKey: "app_temp")
                                 {
                                     DispatchQueue.main.sync {
                                         //Displays Weather info
@@ -225,7 +227,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                                         let line4 = "Feels Like : \(Int(realFeel as! Double))°F"
                                         self.weatherLabel.text = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4
                                         // Calls text to peech to say current weather
-                                        self.textToSpeech(name: "\(self.greetingLabel.text ?? "Kasey")", temp: "\(Int(temperature as! Double))",decription: "\(description)" ,realFeel: "\(Int(realFeel as! Double))" )
+                                        self.textToSpeechC(name: "\(self.greetingLabel.text ?? "Kasey")", temp: "\(Int(temperature as! Double))",decription: "\(description)" ,realFeel: "\(Int(realFeel as! Double))" )
                                     }
                                 }}
                         } else // list of error codes
@@ -242,9 +244,70 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         }
         dataTask.resume()
     }
+    //MARK:- Get Forecast
+    func getForecast() {
+        let session = URLSession.shared
+        // Api webite
+        let weatherURL = URL(string:"http://api.weatherbit.io/v2.0/forecast/daily?&\(self.saveZipcode)&units=I&key=92bc115e8b094ca6a3cb53fbcd569198")!
+        // Start session
+        let dataTask = session.dataTask(with: weatherURL) {
+            (data: Data?, response: URLResponse?, error: Error?) in
+            if let error = error {
+                print("Error:\n\(error)")
+            } else {
+                if let data = data {
+                    // All data from weather API
+                    let dataString = String(data: data, encoding: String.Encoding.utf8)
+                    print("All the forecast data:\n\(dataString!)")
+                    // Use JSON to navigate
+                    if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
+                        // Weather is a struct in api data
+                        let weatherData = (jsonObj["data"]as! NSArray)
+                        // Access "Weather's" data
+                        if let aDictionary = weatherData[0] as? NSDictionary{
+                            // Get value of lowest temp
+                            if let temperatureL = aDictionary.value(forKey: "min_temp"),
+                                // Get value of max temp
+                                let temperatureH = aDictionary.value(forKey: "max_temp"),
+                                // Get decriptions for sky
+                                let rain = aDictionary.value(forKey: "pop")
+                                // Get Real Feel temperature
+                            {
+                                DispatchQueue.main.sync {
+                                    //Displays Weather info
+                                    let line1 = "High of : \(Int(temperatureH as! Double))°F"
+                                    let line2 = "Low of : \(Int(temperatureL as! Double))°F"
+                                    let line3 = "Precipitation : \(Int(rain as! Double))°F"
+                                    self.weatherLabel.text! += "\n" + line1 + "\n" + line2 + "\n" + line3
+                                    // Calls text to peech to say current weather
+                                    self.textToSpeechF(tempH: "\(Int(temperatureH as! Double))",tempL: "\(Int(temperatureL as! Double))" ,rain: "\(Int(rain as! Double))" )
+                                }
+                            }
+                        } else // list of error codes
+                        {
+                            print("Error: unable to find key in dictionary")
+                        }
+                    } else {
+                        print("Error: unable to convert json data")
+                    }
+                } else {
+                    print("Error: did not receive data")
+                }
+            }
+        }
+        dataTask.resume()
+    }
     // MARK:- Good Morning Speech
-    func textToSpeech(name: String, temp: String, decription: String, realFeel: String  ){
+    func textToSpeechC(name: String, temp: String, decription: String, realFeel: String ){
         let utterance = AVSpeechUtterance(string: " \(name). The temperature is currently \(temp) degrees Fahrenheit, with \(decription). The real feel temperature is \(realFeel) degrees.")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+        
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
+    }
+    func textToSpeechF(tempH: String, tempL: String, rain: String){
+        let utterance = AVSpeechUtterance(string: " Today's forcast calls for a high of \(tempH) °, and a low of \(tempL) °. There is also a \(rain) chance of rain")
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 0.5
         
