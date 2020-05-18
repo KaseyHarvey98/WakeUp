@@ -15,33 +15,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time left until you need to Wake Up:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-ZO-F9o">
-                                <rect key="frame" x="44" y="509" width="326" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="akg-hb-dZf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-hZ-Aa4">
-                                <rect key="frame" x="0.0" y="173.66666666666663" width="414" height="276"/>
+                                <rect key="frame" x="0.0" y="225" width="414" height="276"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="276" id="GDN-zZ-6At"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="80"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't Worry Sleep Happy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCU-tO-MHq">
+                                <rect key="frame" x="105" y="586" width="204" height="48"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAKE UP!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPP-Do-Dpq">
-                                <rect key="frame" x="99.333333333333329" y="107.00000000000001" width="215.66666666666669" height="58.666666666666671"/>
+                                <rect key="frame" x="99" y="63" width="216" height="126"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="54"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCU-tO-MHq">
-                                <rect key="frame" x="105" y="586" width="204" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wake Up Countdown" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-ZO-F9o">
+                                <rect key="frame" x="44" y="530" width="326" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="akg-hb-dZf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -50,16 +50,18 @@
                         <constraints>
                             <constraint firstItem="TXK-ZO-F9o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="44" id="5Fr-b2-HqX"/>
                             <constraint firstItem="TXK-ZO-F9o" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="6jo-wF-rQ2"/>
+                            <constraint firstItem="Dtl-hZ-Aa4" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-65.5" id="9TP-VP-6pz"/>
                             <constraint firstItem="xCU-tO-MHq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="105" id="Bjh-41-hqb"/>
+                            <constraint firstItem="Dtl-hZ-Aa4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="MXN-YX-eFq"/>
                             <constraint firstItem="Dtl-hZ-Aa4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N3f-sl-oWa"/>
                             <constraint firstItem="cPP-Do-Dpq" firstAttribute="centerX" secondItem="TXK-ZO-F9o" secondAttribute="centerX" id="RDG-qC-6YU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TXK-ZO-F9o" secondAttribute="bottom" constant="283" id="T3G-8v-2fT"/>
-                            <constraint firstItem="Dtl-hZ-Aa4" firstAttribute="top" secondItem="cPP-Do-Dpq" secondAttribute="bottom" constant="8" id="eyG-YK-XZO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TXK-ZO-F9o" secondAttribute="bottom" constant="262" id="T3G-8v-2fT"/>
+                            <constraint firstItem="Dtl-hZ-Aa4" firstAttribute="top" secondItem="cPP-Do-Dpq" secondAttribute="bottom" constant="36" id="eyG-YK-XZO"/>
                             <constraint firstItem="xCU-tO-MHq" firstAttribute="centerX" secondItem="TXK-ZO-F9o" secondAttribute="centerX" id="gaf-PQ-oZh"/>
                             <constraint firstItem="Dtl-hZ-Aa4" firstAttribute="centerX" secondItem="TXK-ZO-F9o" secondAttribute="centerX" id="hjB-i7-uPh"/>
                             <constraint firstItem="cPP-Do-Dpq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="oYR-JU-SYG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xCU-tO-MHq" secondAttribute="bottom" constant="179" id="vsi-QG-FUL"/>
-                            <constraint firstItem="xCU-tO-MHq" firstAttribute="top" secondItem="TXK-ZO-F9o" secondAttribute="bottom" constant="56" id="wLh-RQ-7bz"/>
+                            <constraint firstItem="xCU-tO-MHq" firstAttribute="top" secondItem="TXK-ZO-F9o" secondAttribute="bottom" constant="35" id="wLh-RQ-7bz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -98,7 +100,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ef7-Xz-qEw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.034083549218756448" green="0.034083549218756448" blue="0.034083549218756448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,7 +184,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMX-JJ-bUc">
                                                     <rect key="frame" x="97" y="11" width="297" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <state key="normal" title="Button">
+                                                    <state key="normal" title="Pick Alarm Sound">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
@@ -198,6 +200,34 @@
                                                 <constraint firstItem="FMX-JJ-bUc" firstAttribute="top" secondItem="Gqv-Aj-W1Z" secondAttribute="topMargin" id="hb3-Y4-oyr"/>
                                                 <constraint firstItem="vcc-YR-TqY" firstAttribute="top" secondItem="Gqv-Aj-W1Z" secondAttribute="topMargin" constant="3.6666666666666643" id="nsv-vA-Cyu"/>
                                                 <constraint firstItem="vcc-YR-TqY" firstAttribute="leading" secondItem="Gqv-Aj-W1Z" secondAttribute="leadingMargin" constant="-5" id="xVG-2k-c1a"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="F1w-ke-Sja">
+                                        <rect key="frame" x="0.0" y="297" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F1w-ke-Sja" id="qFL-TU-ZkD">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5E-6d-8U0">
+                                                    <rect key="frame" x="20" y="-1" width="374" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <state key="normal" title="Delete Alarm">
+                                                        <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="Delete:" destination="oij-YI-49T" eventType="touchUpInside" id="dKO-9t-Hmg"/>
+                                                        <segue destination="BYZ-38-t0r" kind="show" id="w7S-66-Zsv"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="M5E-6d-8U0" firstAttribute="leading" secondItem="qFL-TU-ZkD" secondAttribute="leadingMargin" id="BMn-mg-4Rf"/>
+                                                <constraint firstItem="M5E-6d-8U0" firstAttribute="centerY" secondItem="qFL-TU-ZkD" secondAttribute="centerY" id="aCf-vs-wjl"/>
+                                                <constraint firstItem="M5E-6d-8U0" firstAttribute="trailing" secondItem="qFL-TU-ZkD" secondAttribute="trailingMargin" id="f0P-J0-neY"/>
+                                                <constraint firstItem="M5E-6d-8U0" firstAttribute="top" secondItem="qFL-TU-ZkD" secondAttribute="topMargin" constant="-12" id="ynA-Wc-SSD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -358,18 +388,18 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="162" id="mpw-DE-hpR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="40"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap9-Xb-na0">
-                                <rect key="frame" x="152.33333333333334" y="488" width="109.33333333333334" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <rect key="frame" x="109.66666666666667" y="407.66666666666669" width="194.66666666666663" height="91"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXV-Ts-Iwf">
-                                <rect key="frame" x="171.66666666666666" y="627" width="71" height="42"/>
+                                <rect key="frame" x="171.66666666666666" y="589.66666666666663" width="71" height="79.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Im Up!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -402,6 +432,7 @@
                             <constraint firstItem="l7R-ky-Lsn" firstAttribute="bottom" secondItem="Ea5-2k-uSx" secondAttribute="bottom" constant="101" id="T6L-vY-LwM"/>
                             <constraint firstItem="PXV-Ts-Iwf" firstAttribute="top" secondItem="Ap9-Xb-na0" secondAttribute="bottom" constant="91" id="lPe-ep-Lyp"/>
                             <constraint firstItem="Ap9-Xb-na0" firstAttribute="centerX" secondItem="l7R-ky-Lsn" secondAttribute="centerX" id="lkF-zw-NBw"/>
+                            <constraint firstItem="Ap9-Xb-na0" firstAttribute="centerY" secondItem="l7R-ky-Lsn" secondAttribute="centerY" id="vkq-FO-pOE"/>
                             <constraint firstItem="Ap9-Xb-na0" firstAttribute="centerX" secondItem="PXV-Ts-Iwf" secondAttribute="centerX" id="xXG-KU-o3h"/>
                             <constraint firstItem="x9o-eE-7hb" firstAttribute="centerX" secondItem="Ap9-Xb-na0" secondAttribute="centerX" id="zcB-w6-uJb"/>
                         </constraints>
@@ -504,13 +535,15 @@
                                     <constraint firstAttribute="height" constant="162" id="YaK-Tl-sM5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="54"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlW-2S-3r1">
                                 <rect key="frame" x="167" y="345.33333333333331" width="94" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Snooze"/>
+                                <state key="normal" title="Snooze">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="goToCD:" destination="XJV-Lw-nVh" eventType="touchUpInside" id="sko-TR-3f2"/>
                                 </connections>
@@ -518,7 +551,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Km-iD-cKZ">
                                 <rect key="frame" x="161" y="426.33333333333331" width="92" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="I'm Up!"/>
+                                <state key="normal" title="I'm Up!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="goToMS:" destination="XJV-Lw-nVh" eventType="touchUpInside" id="tHA-d4-xNt"/>
                                 </connections>
@@ -526,7 +561,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9k6-bZ-XH3">
                                 <rect key="frame" x="186" y="521.33333333333337" width="42" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="End"/>
+                                <state key="normal" title="End">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="End:" destination="XJV-Lw-nVh" eventType="touchUpInside" id="f7E-cU-ezi"/>
                                 </connections>
@@ -578,6 +615,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="43A-au-lvX"/>
-        <segue reference="zM1-A4-T8T"/>
+        <segue reference="HI3-YJ-Fyp"/>
     </inferredMetricsTieBreakers>
 </document>

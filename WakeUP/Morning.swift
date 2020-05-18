@@ -41,6 +41,9 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         }
         if let x = UserDefaults.standard.object(forKey: "location") as? String{
             saveZipcode = x
+            if x.isEmpty {
+                saveZipcode = "postal_code=27601&country=US"
+            }
         }
         greetingLabel.text = "Good Morning " + name
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -146,15 +149,18 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     }
     // Returns zipcode and country from user's location
     func string(from placemark: CLPlacemark) -> String {
-        var line1 = ""
+        var line = ""
         if let s = placemark.postalCode {
-            line1 += "postal_code=" + s
+            line += "postal_code=" + s
         }
         if let s = placemark.isoCountryCode {
-            line1 += "&country=" + s
+            line += "&country=" + s
         }
-        UserDefaults.standard.set(line1, forKey: "location")
-        return line1
+        if line.isEmpty {
+            saveZipcode = "postal_code=27601&country=US"
+        }
+        UserDefaults.standard.set(line, forKey: "location")
+        return line
         
     }
     
@@ -225,7 +231,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                                         let line2 = "Current Temperatue : \(Int(temperature as! Double))°F"
                                         let line3 = "The sky shows \(description)."
                                         let line4 = "Feels Like : \(Int(realFeel as! Double))°F"
-                                        self.weatherLabel.text = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4
+                                        self.weatherLabel.text = "\n" + line1 + "\n" + line2 + "\n" + line3 + "\n" + line4
                                         // Calls text to peech to say current weather
                                         self.textToSpeechC(name: "\(self.greetingLabel.text ?? "Kasey")", temp: "\(Int(temperature as! Double))",decription: "\(description)" ,realFeel: "\(Int(realFeel as! Double))" )
                                     }
@@ -275,10 +281,11 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                             {
                                 DispatchQueue.main.sync {
                                     //Displays Weather info
+                                    let line0 = "Today's Forecast"
                                     let line1 = "High of : \(Int(temperatureH as! Double))°F"
                                     let line2 = "Low of : \(Int(temperatureL as! Double))°F"
                                     let line3 = "Precipitation : \(Int(rain as! Double))°F"
-                                    self.weatherLabel.text! += "\n" + line1 + "\n" + line2 + "\n" + line3
+                                    self.weatherLabel.text! += "\n" + line0 + line1 + "\n" + line2 + "\n" + line3
                                     // Calls text to peech to say current weather
                                     self.textToSpeechF(tempH: "\(Int(temperatureH as! Double))",tempL: "\(Int(temperatureL as! Double))" ,rain: "\(Int(rain as! Double))" )
                                 }

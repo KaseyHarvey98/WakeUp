@@ -15,12 +15,19 @@ class Settings: UITableViewController{
     @IBOutlet weak var alarmTime: UIDatePicker!
     // Goes to home screen vis button
     @IBAction func save(_ sender: Any) {
+        sent = true
         performSegue(withIdentifier: "transfer", sender: self)
+    }
+    // deletes alarm
+    @IBAction func Delete(_ sender: Any) {
+        delete = true
+    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     private var datePicker : UIDatePicker?
     var alarmText = Date()
     var sent = false
+    var delete = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +55,17 @@ class Settings: UITableViewController{
     }
     // MARK:- Table View Data Source
     override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int { return 3 }
+                            numberOfRowsInSection section: Int) -> Int { return 4 }
     
     // MARK:- Transfer Time and Name / Set Defaults
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         sent = true
+        if delete == true {
+            sent = false
+        }
+        if nameLabel.text == nil{
+            nameLabel.text = "John Doe"
+        }
         UserDefaults.standard.set(self.alarmText, forKey: "alarm")
         UserDefaults.standard.set(self.nameLabel.text, forKey: "name")
         UserDefaults.standard.set(sent, forKey: "recieved")

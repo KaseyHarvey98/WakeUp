@@ -85,17 +85,7 @@ class HomeScreen: UIViewController  {
             differM = timeDifference.minute! + 60
             differS = timeDifference.second! + 60
         }
-        // Time diference is written in base value ( 1 hour = 1 difference). This converts to seconds
-        if ((timeDifference.hour == 0) && ((timeDifference.minute != 0) || (timeDifference.second != 0))){
-            difference = (differM * 60) + (differS)
-        }
-        if (((timeDifference.hour == 0) && (timeDifference.minute == 0)) && (timeDifference.second != 0)){
-            difference = (differS)
-        }
-        if (((timeDifference.hour != 0) || (timeDifference.minute != 0) || (timeDifference.second != 0))){
-            
             difference = (differH * 3600) + (differM * 60) + (differS)
-        }
         
         // If countdown is done, go to wake up screen
         if difference == 1 && received == true {

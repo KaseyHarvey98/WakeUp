@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AudioToolbox
 
 class WakeUpScreen: UIViewController {
     
@@ -19,7 +20,7 @@ class WakeUpScreen: UIViewController {
     }
     // Go to HomeScreen via button
     @IBAction func End(_ sender: Any) {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     // Go to Countdown via button
     @IBAction func goToCD(_ sender: Any) {
@@ -45,6 +46,7 @@ class WakeUpScreen: UIViewController {
             try! AVAudioSession.sharedInstance().setActive(true)
             try alarmSound = AVAudioPlayer(data: sound.data, fileTypeHint: AVFileType.mp3.rawValue)
             alarmSound!.play()
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         } catch {
             // couldn't load file :(
         }

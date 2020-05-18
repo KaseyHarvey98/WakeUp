@@ -41,7 +41,7 @@ class CountDown: UIViewController {
     
     @objc func  printTime(){
         let startTime = Date()  // current time
-        let endTime =  stop + 5  // 9 min snooze
+        let endTime =  stop + 9 * 60  // 9 min snooze
         // difference from current to alarm time
         let timeDifference = userAlarm.dateComponents([.hour,.minute,.second], from: startTime, to: endTime)
         difference = timeDifference.second!
