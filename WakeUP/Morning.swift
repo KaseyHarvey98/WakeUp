@@ -254,7 +254,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
     func getForecast() {
         let session = URLSession.shared
         // Api webite
-        let weatherURL = URL(string:"http://api.weatherbit.io/v2.0/forecast/daily?&\(self.saveZipcode)&units=I&key=92bc115e8b094ca6a3cb53fbcd569198")!
+        let weatherURL = URL(string:"http://api.weatherbit.io/v2.0/forecast/daily?&\(self.saveZipcode)&units=I&key=")!
         // Start session
         let dataTask = session.dataTask(with: weatherURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
