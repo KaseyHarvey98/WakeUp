@@ -207,8 +207,8 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             } else {
                 if let data = data {
                     // All data from weather API
-                    let dataString = String(data: data, encoding: String.Encoding.utf8)
-                    print("All the weather data:\n\(dataString!)")
+                    _ = String(data: data, encoding: String.Encoding.utf8)
+//                    print("All the weather data:\n\(dataString!)")
                     // Use JSON to navigate
                     if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
                         // Weather is a struct in api data
@@ -263,8 +263,8 @@ class Morning : UIViewController, CLLocationManagerDelegate {
             } else {
                 if let data = data {
                     // All data from weather API
-                    let dataString = String(data: data, encoding: String.Encoding.utf8)
-                    print("All the forecast data:\n\(dataString!)")
+                    _ = String(data: data, encoding: String.Encoding.utf8)
+//                    print("All the forecast data:\n\(dataString!)")
                     // Use JSON to navigate
                     if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
                         // Weather is a struct in api data
@@ -284,8 +284,8 @@ class Morning : UIViewController, CLLocationManagerDelegate {
                                     let line0 = "Today's Forecast"
                                     let line1 = "High of : \(Int(temperatureH as! Double))°F"
                                     let line2 = "Low of : \(Int(temperatureL as! Double))°F"
-                                    let line3 = "Precipitation : \(Int(rain as! Double))°F"
-                                    self.weatherLabel.text! += "\n" + line0 + line1 + "\n" + line2 + "\n" + line3
+                                    let line3 = "Precipitation : \(Int(rain as! Double)) %"
+                                    self.weatherLabel.text! += "\n" + line0 + "\n" + line1 + "\n" + line2 + "\n" + line3
                                     // Calls text to peech to say current weather
                                     self.textToSpeechF(tempH: "\(Int(temperatureH as! Double))",tempL: "\(Int(temperatureL as! Double))" ,rain: "\(Int(rain as! Double))" )
                                 }
@@ -314,7 +314,7 @@ class Morning : UIViewController, CLLocationManagerDelegate {
         synthesizer.speak(utterance)
     }
     func textToSpeechF(tempH: String, tempL: String, rain: String){
-        let utterance = AVSpeechUtterance(string: " Today's forcast calls for a high of \(tempH) °, and a low of \(tempL) °. There is also a \(rain) chance of rain")
+        let utterance = AVSpeechUtterance(string: " Today's forcast calls for a high of \(tempH) °, and a low of \(tempL) °. There is also a \(rain) percent chance of rain")
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 0.5
         

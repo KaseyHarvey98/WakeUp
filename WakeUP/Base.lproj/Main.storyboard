@@ -12,11 +12,11 @@
             <objects>
                 <viewController storyboardIdentifier="Home" id="BYZ-38-t0r" customClass="HomeScreen" customModule="WakeUP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtl-hZ-Aa4">
-                                <rect key="frame" x="0.0" y="225" width="414" height="276"/>
+                                <rect key="frame" x="0.0" y="176" width="414" height="276"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="276" id="GDN-zZ-6At"/>
                                 </constraints>
@@ -25,19 +25,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't Worry Sleep Happy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCU-tO-MHq">
-                                <rect key="frame" x="105" y="586" width="204" height="48"/>
+                                <rect key="frame" x="105" y="532" width="204" height="48"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAKE UP!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPP-Do-Dpq">
-                                <rect key="frame" x="99" y="63" width="216" height="126"/>
+                                <rect key="frame" x="99" y="19" width="216" height="121"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="54"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wake Up Countdown" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXK-ZO-F9o">
-                                <rect key="frame" x="44" y="530" width="326" height="21"/>
+                                <rect key="frame" x="44" y="476" width="326" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="akg-hb-dZf"/>
                                 </constraints>
@@ -98,7 +98,7 @@
             <objects>
                 <tableViewController id="oij-YI-49T" customClass="Settings" customModule="WakeUP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ef7-Xz-qEw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.034083549218756448" green="0.034083549218756448" blue="0.034083549218756448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -259,7 +259,7 @@
             <objects>
                 <tableViewController id="ROM-mh-Y8o" customClass="SoundPicker" customModule="WakeUP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="oFo-dZ-6nh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -471,15 +471,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hd3-6o-Avw">
-                                <rect key="frame" x="36" y="324" width="334" height="165"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="165" id="mLH-WG-YFb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bw1-KD-3A5">
                                 <rect key="frame" x="157" y="723" width="93" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -492,6 +483,15 @@
                                     <action selector="End:" destination="R3r-wq-w01" eventType="touchUpInside" id="U9c-vU-gVR"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Information Loading.." lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hd3-6o-Avw">
+                                <rect key="frame" x="36" y="267" width="334" height="355"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="355" id="mLH-WG-YFb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -500,7 +500,7 @@
                             <constraint firstItem="Y4T-cC-RnV" firstAttribute="bottom" secondItem="Bw1-KD-3A5" secondAttribute="bottom" id="JjU-le-Gcd"/>
                             <constraint firstItem="Y4T-cC-RnV" firstAttribute="trailing" secondItem="mAs-YV-NJ9" secondAttribute="trailing" constant="44" id="bOi-c3-1km"/>
                             <constraint firstItem="mAs-YV-NJ9" firstAttribute="top" secondItem="Y4T-cC-RnV" secondAttribute="top" constant="54" id="bf2-rY-4a9"/>
-                            <constraint firstItem="Hd3-6o-Avw" firstAttribute="top" secondItem="mAs-YV-NJ9" secondAttribute="bottom" constant="83" id="c4U-gm-ooB"/>
+                            <constraint firstItem="Hd3-6o-Avw" firstAttribute="top" secondItem="mAs-YV-NJ9" secondAttribute="bottom" constant="26" id="c4U-gm-ooB"/>
                             <constraint firstItem="Hd3-6o-Avw" firstAttribute="leading" secondItem="mAs-YV-NJ9" secondAttribute="leading" id="j1G-O7-zJs"/>
                             <constraint firstItem="Hd3-6o-Avw" firstAttribute="trailing" secondItem="mAs-YV-NJ9" secondAttribute="trailing" id="nl3-Il-MPk"/>
                             <constraint firstItem="Y4T-cC-RnV" firstAttribute="trailing" secondItem="Bw1-KD-3A5" secondAttribute="trailing" constant="164" id="q90-Ld-UUf"/>
